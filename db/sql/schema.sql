@@ -1,5 +1,6 @@
-drop database if exists test_trade_sys;
+/*drop database if exists test_trade_sys;
 create database test_trade_sys;
+*/
 use test_trade_sys;
 
 drop table if exists tb_hsi_type;
@@ -13,6 +14,7 @@ create table tb_hsi_type
     PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+/*
 drop table if exists tb_ohlc_type;
 create table tb_ohlc_type
 (
@@ -31,6 +33,7 @@ create table tb_period
     mod_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+*/
 
 drop table if exists tb_ohlc_hour;
 create table tb_ohlc_hour
@@ -64,7 +67,9 @@ drop table if exists tb_ma_hour;
 create table tb_ma_hour
 (
     id int(11) unsigned NOT NULL AUTO_INCREMENT,
+    hsi_type_id int(11) unsigned NOT NULL,
     ma_value int(11) unsigned NOT NULL,
+    ma_time datetime NOT NULL,
     mod_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -73,7 +78,9 @@ drop table if exists tb_ma_day;
 create table tb_ma_day
 (
     id int(11) unsigned NOT NULL AUTO_INCREMENT,
+    hsi_type_id int(11) unsigned NOT NULL,
     ma_value int(11) unsigned NOT NULL,
+    ma_time datetime NOT NULL,
     mod_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
