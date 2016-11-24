@@ -1,6 +1,6 @@
-/*drop database if exists test_trade_sys;
+drop database if exists test_trade_sys;
 create database test_trade_sys;
-*/
+
 use test_trade_sys;
 
 drop table if exists tb_hsi_type;
@@ -39,28 +39,34 @@ drop table if exists tb_ohlc_hour;
 create table tb_ohlc_hour
 (
     id int(11) unsigned NOT NULL AUTO_INCREMENT,
-    hsi_type_id int(11) NOT NULL,
+    is_exchange int(11) unsigned NOT NULL,
+    hsi_type_id int(11) unsigned NOT NULL,
     open_num int(11) NOT NULL,
     high_num int(11) NOT NULL,
     low_num int(11) NOT NULL,
     close_num int(11) NOT NULL,
     ohlc_time datetime NOT NULL,
     mod_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    UNIQUE KEY (ohlc_time),
+    FOREIGN KEY (hsi_type_id) REFERENCES tb_hsi_type(id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 drop table if exists tb_ohlc_day;
 create table tb_ohlc_day
 (
     id int(11) unsigned NOT NULL AUTO_INCREMENT,
-    hsi_type_id int(11) NOT NULL,
+    is_exchange int(11) unsigned NOT NULL,
+    hsi_type_id int(11) unsigned NOT NULL,
     open_num int(11) NOT NULL,
     high_num int(11) NOT NULL,
     low_num int(11) NOT NULL,
     close_num int(11) NOT NULL,
     ohlc_time datetime NOT NULL,
     mod_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    UNIQUE KEY(ohlc_time),
+    FOREIGN KEY (hsi_type_id) REFERENCES tb_hsi_type(id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 drop table if exists tb_ma_hour;
