@@ -84,6 +84,7 @@ create table tb_ma_hour
     hsi_type_id int(11) unsigned NOT NULL,
     ma_value int(11) unsigned NOT NULL,
     ma_time datetime NOT NULL,
+    period int(11) unsigned NOT NULL,
     mod_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -95,6 +96,21 @@ create table tb_ma_day
     hsi_type_id int(11) unsigned NOT NULL,
     ma_value int(11) unsigned NOT NULL,
     ma_time datetime NOT NULL,
+    period int(11) unsigned NOT NULL,
     mod_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+drop table if exists tb_trade_rec;
+create table tb_trade_rec
+(
+    code varchar(64) NOT NULL,
+    name varchar(64) NOT NULL,
+    direction varchar(64) NOT NULL,
+    num int(11) NOT NULL,
+    price float NOT NULL,
+    amount int(11) NOT NULL,
+    op_num int(11) NOT NULL,
+    trade_time datetime NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
