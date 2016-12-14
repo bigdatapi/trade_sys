@@ -1,5 +1,7 @@
 drop database if exists test_trade_sys;
-create database test_trade_sys;
+create database test_trade_sys
+    DEFAULT CHARACTER SET utf8
+    DEFAULT COLLATE utf8_general_ci;
 
 use test_trade_sys;
 
