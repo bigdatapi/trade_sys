@@ -106,13 +106,15 @@ create table tb_ma_day
 drop table if exists tb_trade_rec;
 create table tb_trade_rec
 (
+    id int(11) unsigned NOT NULL AUTO_INCREMENT,
     code varchar(64) NOT NULL,
     name varchar(64) NOT NULL,
     direction varchar(64) NOT NULL,
     num int(11) NOT NULL,
     price float NOT NULL,
-    amount int(11) NOT NULL,
+    amount float NOT NULL,
     op_num int(11) NOT NULL,
-    trade_time datetime NOT NULL
+    trade_time datetime NOT NULL,
+    PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
