@@ -9,13 +9,14 @@ import MySQLdb
 import traceback
 import datetime
 
+from parse_trade_rec import parse_trade_rec1
 
 
 def _store_db(*args):
     global conn
     global update_counter
     #print(args)
-    sql="insert into tb_trade_rec(code,name,direction,num,price,amount,op_num,trade_time) values(%s, %s, %s, %s, %s, %s, %s, %s)"
+    sql="insert into tb_trade_rec(code,name,direction,num,price,amount,trade_time) values(%s, %s, %s, %s, %s, %s, %s)"
     #print(sql)
     #return 1
     cursor=conn.cursor()
@@ -39,6 +40,20 @@ def _load_hsi(input_path):
             if not line:
                 break
             line=line.strip()
+            try:
+                res_map=parse_trade_rec1(line)
+            except Exception,e:
+                print("parse_trade_rec1 error for:%s"%line)
+                traceback.print_exc()
+                continue
+            code=res_map["code"]
+            name=res_map["name"]
+            direction=res_map["direction"]
+            num=res_map["num"]
+            price=res_map["price"]
+            amount=res_map["amount"]
+            trade_time=res_map["time"]
+            """
             fields=line.split("\t")
             if len(fields)!=8:
                 print("fields format changed",sys.stderr)
@@ -54,6 +69,7 @@ def _load_hsi(input_path):
                 #traceback.print_exc()
                 print("filtered : ",line)
                 continue
+"""
 
             if _store_db(
                     code,
@@ -62,7 +78,6 @@ def _load_hsi(input_path):
                     num,
                     price,
                     amount,
-                    op_num,
                     trade_time
                 ):
                 print("store db for row_num=%d failed" % row_num, sys.stderr)
