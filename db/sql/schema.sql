@@ -113,7 +113,6 @@ create table tb_trade_rec
     num int(11) NOT NULL,
     price float NOT NULL,
     amount float NOT NULL,
-    op_num int(11) NOT NULL,
     trade_time datetime NOT NULL,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
