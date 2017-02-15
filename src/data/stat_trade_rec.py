@@ -36,12 +36,14 @@ def _stat():
                 if direction==u'买入':
                     stat_dict[kk][2]+=num
                     stat_dict[kk][3]+=amount
+                    stat_dict[kk][7]-=amount
                 elif direction==u'卖出':
                     stat_dict[kk][2]-=num
-                    stat_dict[kk][3]-=amount
+                    # stat_dict[kk][3]+=amount
+                    stat_dict[kk][7]+=amount
                     if stat_dict[kk][2]==0:
                         stat_dict[kk][5]=trade_time
-                        stat_dict[kk][7]=-stat_dict[kk][3]
+                        #stat_dict[kk][7]=stat_dict[kk][3]
                     elif stat_dict[kk][2]<0:
                         print("err num: %s %s"%(id,code),sys.stderr)
                         ret_code=-3
@@ -58,7 +60,7 @@ def _stat():
                 bull_or_bear=''
                 start_time=trade_time
                 end_time=''
-                win_or_lose=amount
+                win_or_lose=-amount
 
                 if u'牛' in name:
                     bull_or_bear='bull'
@@ -79,14 +81,14 @@ def _print_stat(stat_dict):
         dd.append(stat_dict[k])
     print("total len for stat_dict : %d"%len(dd))
     xx=sorted(dd,key=lambda dd:dd[7])
-    print("++++++++++最大亏损前10++++++++++")
-    for ii in xx[:10]:
-        print("%d %s %d %d %s [%s] %s %s"%(ii[0],ii[1],ii[2],ii[3],ii[4],ii[5],ii[6],ii[7]))
+    print("++++++++++最大亏损前20++++++++++")
+    for ii in xx[:20]:
+        print("| %d | %s | %d | %d | %s | [%s] | %s | %s |"%(ii[0],ii[1],ii[2],ii[3],ii[4],ii[5],ii[6],ii[7]))
 
 
-    print("++++++++++最大赚钱前5++++++++++")
-    for ii in xx[-5:]:
-        print("%d %s %d %d %s [%s] %s %s"%(ii[0],ii[1],ii[2],ii[3],ii[4],ii[5],ii[6],ii[7]))
+    print("++++++++++最大赚钱前10++++++++++")
+    for ii in xx[-10:]:
+        print("| %d | %s | %d | %d | %s | [%s] | %s | %s |"%(ii[0],ii[1],ii[2],ii[3],ii[4],ii[5],ii[6],ii[7]))
 
     w_bear_count,w_bull_count,l_bear_count,l_bull_count=0,0,0,0
     for ii in xx:
