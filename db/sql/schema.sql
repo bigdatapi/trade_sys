@@ -88,6 +88,7 @@ create table tb_ma_hour
     ma_time datetime NOT NULL,
     period int(11) unsigned NOT NULL,
     mod_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    ma_type varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
